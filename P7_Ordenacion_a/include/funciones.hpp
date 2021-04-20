@@ -20,7 +20,7 @@ void Print(std::vector<Clave>* secuencia) {
   for (int i = 0; i < secuencia->size(); ++i) {
     std::cout << secuencia->at(i) << " ";
   }
-  std::cout << "\n\n";
+  std::cout << "\n";
 }
 
 //x -> at(i)
@@ -32,7 +32,7 @@ void Insercion (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
     aux = secuencia->at(i);
     while ((j >= 0) && (aux < secuencia->at(j)) && (j < secuencia->size())) {
       if ( traza) {
-        std::cout << "Comparacion: " << aux << " < " << secuencia->at(j) << " : true";
+        std::cout << "\nComparacion: " << aux << " < " << secuencia->at(j) << " : true";
       }
       secuencia->at(j+1) = secuencia->at(j);
       //secuencia->at(j) = aux;
@@ -48,9 +48,9 @@ void Insercion (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
 
     if (traza) {
       if (j < secuencia->size()) {
-        std::cout << "Comparacion: " << aux << " < " << secuencia->at(j) << " : false";
+        std::cout << "\nComparacion: " << aux << " < " << secuencia->at(j) << " : false";
       } else {
-        std::cout << "Comparacion: " << aux << " < " << secuencia->at(j+1) << " : false";
+        std::cout << "\nComparacion: " << aux << " < " << secuencia->at(j+1) << " : false";
       }
       Print(secuencia);
     }
@@ -68,30 +68,30 @@ void QSort (std::vector<Clave>* secuencia, int inicio, int fin, bool traza) {
   while (i <= f) {
     while (secuencia->at(i) < aux) {
       if (traza) {
-        std::cout << "Comparacion: " << secuencia->at(i) << " < " << aux << " : true";
+        std::cout << "\nComparacion: " << secuencia->at(i) << " < " << aux << " : true";
         Print(secuencia);
       }
       ++i;
     }
       if (traza) {
-        std::cout << "Comparacion: " << secuencia->at(i) << " < " << aux << " : false";
+        std::cout << "\nComparacion: " << secuencia->at(i) << " < " << aux << " : false";
         Print(secuencia);
       }
     while (secuencia->at(f) > aux) {
       if (traza) {
-        std::cout << "Comparacion: " << secuencia->at(f) << " > " << aux << " : true";
+        std::cout << "\nComparacion: " << secuencia->at(f) << " > " << aux << " : true";
         Print(secuencia);
       }
       --f;
     }
       if (traza) {
-        std::cout << "Comparacion: " << secuencia->at(i) << " < " << aux << " : false";
+        std::cout << "\nComparacion: " << secuencia->at(i) << " < " << aux << " : false";
         Print(secuencia);
       }
     if ( i <= f) {
       std::swap(secuencia->at(i), secuencia->at(f));
       if (traza) {
-        std::cout << "Comparacion: " << i << " <= " << f << " : true -> swap ( " << secuencia->at(i) << " " << secuencia->at(f) << " )";
+        std::cout << "\nComparacion: " << i << " <= " << f << " : true -> swap ( " << secuencia->at(i) << " " << secuencia->at(f) << " )";
         Print(secuencia);
       }
       ++i;
@@ -100,14 +100,14 @@ void QSort (std::vector<Clave>* secuencia, int inicio, int fin, bool traza) {
   }
   if (inicio < f) {
     if (traza) {
-      std::cout << "Comparacion: inicio (" << inicio << ") < iterador f (" << f << ") : true";
+      std::cout << "\nComparacion: inicio (" << inicio << ") < iterador f (" << f << ") : true";
       Print(secuencia);
     }
     QSort(secuencia, inicio, f, traza);
   }
   if (i < fin) {
     if (traza) {
-      std::cout << "Comparacion: iterador i(" << i << ") < fin (" << fin << ") : true";
+      std::cout << "\nComparacion: iterador i(" << i << ") < fin (" << fin << ") : true";
       Print(secuencia);
     }
     QSort(secuencia, i, fin, traza);
@@ -121,7 +121,50 @@ void QuickSort (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
   QSort(secuencia, inicio, fin, traza);
 }
 
+template<class Clave>
+void deltasort (int del, std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
+  for (int i = del; i < size_secuencia; ++i) {
+    Clave aux = secuencia->at(i);
+    int j = i;
+    bool flag = false;
+    bool flag2 = false;
+    while ((j >= del) && (aux < secuencia->at( j - del))) {
+      flag = false;
+      flag2 = false;
+      if (traza) {
+        std::cout << "\nComparacion: " << aux << " < " << secuencia->at( j - del) << " : true";
+        flag = true;
+      }
+      secuencia->at(j) = secuencia->at( j - del);
+      if (traza) {
+        Print(secuencia);
+        flag2 = true;
+      }
+      j = j - del;
+    }
+      if (traza) {
+        if (!flag) {
+          if ((j >= del)) {
+            std::cout << "\nComparacion: " << aux << " < " << secuencia->at( j -del ) << " : false";
+          } else {
+            std::cout << "\nComparacion: iterador j (" << j << ") >= (" << del << ") : false";
+          }
+        }     
+      }
+    secuencia->at(j) = aux;
+      if (traza) {
+        if ((!flag) || flag2) {
+          Print(secuencia);
+        }  
+      }
+  }
+}
+
 template <class Clave>
 void ShellSort (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
-
+  int del = size_secuencia;
+  while (del > 1) {
+    del = del /2;
+    deltasort(del, secuencia, size_secuencia, traza);
+  }
 }

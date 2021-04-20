@@ -58,7 +58,9 @@ int main() {
       std::cout << "\nElemento: ";
       std::cin >> secuencia->at(i);
     }
-		std::cout << std::endl;
+		if (mostrar_traza) {
+			std::cout << std::endl;
+		}
   } else {
     srand(time(NULL));
     for (int i = 0; i < secuencia->size(); ++i) {
