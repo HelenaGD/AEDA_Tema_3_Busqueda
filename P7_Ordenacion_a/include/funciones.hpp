@@ -17,7 +17,7 @@ int RecogerCantidadPositiva(int cantidad_max = INFINITO) {
 template <class Clave>
 void Print(std::vector<Clave>* secuencia) {
   std::cout << "\nSecuencia: ";
-  for (int i = 0; i < secuencia->size(); ++i) {
+  for (int i = 0; i < size_secuencia; ++i) {
     std::cout << secuencia->at(i) << " ";
   }
   std::cout << "\n";
@@ -27,10 +27,10 @@ void Print(std::vector<Clave>* secuencia) {
 template <class Clave>
 void Insercion (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
   Clave aux;
-  for (int i = 1; i < secuencia->size(); ++i) {
+  for (int i = 1; i < size_secuencia; ++i) {
     int j = i - 1;
     aux = secuencia->at(i);
-    while ((j >= 0) && (aux < secuencia->at(j)) && (j < secuencia->size())) {
+    while ((j >= 0) && (aux < secuencia->at(j)) && (j < size_secuencia)) {
       if ( traza) {
         std::cout << "\nComparacion: " << aux << " < " << secuencia->at(j) << " : true";
       }
@@ -47,7 +47,7 @@ void Insercion (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
     //secuencia->erase(i+1);
 
     if (traza) {
-      if (j < secuencia->size()) {
+      if (j < size_secuencia) {
         std::cout << "\nComparacion: " << aux << " < " << secuencia->at(j) << " : false";
       } else {
         std::cout << "\nComparacion: " << aux << " < " << secuencia->at(j+1) << " : false";
@@ -117,7 +117,7 @@ void QSort (std::vector<Clave>* secuencia, int inicio, int fin, bool traza) {
 template <class Clave>
 void QuickSort (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
   int inicio = 0;
-  int fin = secuencia->size() - 1;
+  int fin = size_secuencia - 1;
   QSort(secuencia, inicio, fin, traza);
 }
 
