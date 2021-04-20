@@ -9,20 +9,6 @@
 #define MINIMO 1
 
 using Clave = int;
-/*
-int RecogerCantidadPositiva(int cantidad_max = INFINITO);
-
-template <class Clave>
-void Insercion (std::vector<Clave>* secuencia, int size_secuencia, bool traza);
-
-template <class Clave>
-void QuickSort (std::vector<Clave>* secuencia, int size_secuencia, bool traza);
-
-template <class Clave>
-void ShellSort (std::vector<Clave>* secuencia, int size_secuencia, bool traza);
-
-template <class Clave>
-void print(std::vector<Clave>* secuencia);*/
 
 int main() {
 
@@ -66,7 +52,7 @@ int main() {
     for (int i = 0; i < secuencia->size(); ++i) {
       secuencia->at(i) = rand() % (MAXIMO - MINIMO - 1) + MINIMO;
     }
-		Print(secuencia);
+		Print(secuencia, size_secuencia);
   }
 
 	switch (tipo_algoritmo) {
@@ -82,7 +68,7 @@ int main() {
 	}
 
 	if(!mostrar_traza) {
-		Print(secuencia);
+		Print(secuencia, size_secuencia);
 	}
 
 	//system("clear");

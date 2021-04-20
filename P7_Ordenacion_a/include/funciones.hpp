@@ -58,7 +58,7 @@ void Insercion (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
 }
 
 template <class Clave>
-void QSort (std::vector<Clave>* secuencia, int inicio, int fin, bool traza) {
+void QSort (std::vector<Clave>* secuencia, int inicio, int fin, bool traza, int size_secuencia) {
   int i = inicio;
   int f = fin;
   Clave aux = secuencia->at( (i + f) / 2 );
@@ -103,14 +103,14 @@ void QSort (std::vector<Clave>* secuencia, int inicio, int fin, bool traza) {
       std::cout << "\nComparacion: inicio (" << inicio << ") < iterador f (" << f << ") : true";
       Print(secuencia, size_secuencia);
     }
-    QSort(secuencia, inicio, f, traza);
+    QSort(secuencia, inicio, f, traza, size_secuencia);
   }
   if (i < fin) {
     if (traza) {
       std::cout << "\nComparacion: iterador i(" << i << ") < fin (" << fin << ") : true";
       Print(secuencia, size_secuencia);
     }
-    QSort(secuencia, i, fin, traza);
+    QSort(secuencia, i, fin, traza, size_secuencia);
   }
 }
 
@@ -118,7 +118,7 @@ template <class Clave>
 void QuickSort (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
   int inicio = 0;
   int fin = size_secuencia - 1;
-  QSort(secuencia, inicio, fin, traza);
+  QSort(secuencia, inicio, fin, traza, size_secuencia);
 }
 
 template<class Clave>
