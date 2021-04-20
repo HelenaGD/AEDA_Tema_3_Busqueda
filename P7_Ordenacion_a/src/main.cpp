@@ -79,5 +79,9 @@ int main() {
 			break;
 	}
 
+	if(!mostrar_traza) {
+		Print(secuencia);
+	}
+
 	//system("clear");
 }
