@@ -286,6 +286,41 @@ void MergeSort (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
 }
 
 template <class Clave>
-void HeapSort (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
+void baja (int inicio, std::vector<Clave>* secuencia, int n, bool traza) {
+  int h1 = 0, h2 = 0, h = 0;
+  while ((2*inicio) <= n) {
+    h1 = 2*inicio;
+    h2 = h1 + 1;
+    if (h1 == n) {
+      h = h1;
+    } else if (secuencia->at(h1) > secuencia->at(h2)) {
+      h = h1;
+    } else {
+      h = h2;
+    }
 
+    if (secuencia->at(h) <= secuencia->at(inicio)) {
+      break;
+    } else {
+      std::swap(secuencia->at(inicio), secuencia->at(h));
+      inicio = h;
+    }
+  }
+}
+
+template <class Clave>
+void heapsort (std::vector<Clave>* secuencia, int n, bool traza) {
+  for (int i = (n / 2); i > 0; --i) {
+    baja(i, secuencia, n, traza);
+  }
+  for (int i = n; i > 1; --i) {
+    std::swap(secuencia->at(1), secuencia->at(i));
+    baja(1, secuencia, i - 1, traza);
+  }
+}
+
+template <class Clave>
+void HeapSort (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
+  int n = size_secuencia - 1;
+  heapsort(secuencia, n, traza);
 }
