@@ -23,6 +23,15 @@ void Print(std::vector<Clave>* secuencia, int size_secuencia) {
   std::cout << "\n";
 }
 
+template <class Clave>
+void Print(std::vector<Clave> secuencia, int size_secuencia) {
+  std::cout << "\nSecuencia: ";
+  for (int i = 0; i < size_secuencia; ++i) {
+    std::cout << secuencia.at(i) << " ";
+  }
+  std::cout << "\n";
+}
+
 //x -> at(i)
 template <class Clave>
 void Insercion (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
@@ -179,7 +188,7 @@ void Seleccion (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
       for (int j = (i + 1); j < size_secuencia; ++j) {
         if (secuencia->at(j) < secuencia->at(minimo)) {
           if (traza) {
-            std::cout << "Comparacion: " << secuencia->at(j) << " < " << secuencia->at(minimo) << " : true";
+            std::cout << "\nComparacion: " << secuencia->at(j) << " < " << secuencia->at(minimo) << " : true";
           }
           minimo = j;
           if (traza) {
@@ -188,7 +197,7 @@ void Seleccion (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
         }
 
         if (traza) {
-          std::cout << "Comparacion: " << secuencia->at(j) << " < " << secuencia->at(minimo) << " : false";
+          std::cout << "\nComparacion: " << secuencia->at(j) << " < " << secuencia->at(minimo) << " : false";
           Print(secuencia, size_secuencia);
         }
       }
@@ -201,30 +210,54 @@ void Seleccion (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
 
 template <class Clave>
 void Mezcla (std::vector<Clave>* secuencia, int inicio, int centro, int fin, bool traza) {
-  std::vector<Clave> aux;
-  aux.resize(secuencia->size());
+  std::vector<Clave> aux = *secuencia;
+  int size_aux = aux.size();
   int i = inicio;
   int k = inicio;
   int j = centro + 1;
   while ((i <= centro) && (j <= fin)) {
     if (secuencia->at(i) < secuencia->at(j)) {
+      if (traza) {
+        std::cout << "\nComparacion: " << secuencia->at(i) << " < " << secuencia->at(j) << " : true";
+      }
       aux.at(k) = secuencia->at(i);
+      if (traza) {
+        Print(aux, size_aux);
+      }
       ++i;
     } else {
+      if (traza) {
+        std::cout << "\nComparacion: " << secuencia->at(i) << " < " << secuencia->at(j) << " : false";
+      }
       aux.at(k) = secuencia->at(j);
+      if (traza) {
+        Print(aux, size_aux);
+      }
       ++j;
     }
     ++k;
   }
   if ( i > centro) {
     while (j <= fin) {
+      if (traza) {
+        std::cout << "\nComparacion: iterador j (" << j << ") <= iterador fin (" << fin << ") : true";
+      }
       aux.at(k) = secuencia->at(j);
+      if (traza) {
+        Print(aux, size_aux);
+      }
       ++j;
       ++k;
     } 
   } else {
       while (i <= centro) {
+        if (traza) {
+          std::cout << "\nComparacion: iterador i (" << i << ") <= iterador centro (" << centro << ") : true";
+        }
         aux.at(k) = secuencia->at(i);
+        if (traza) {
+          Print(aux, size_aux);
+        }
         ++i;
         ++k;
       }
