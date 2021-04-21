@@ -85,17 +85,17 @@ int main() {
 			secuencia1 = secuencia;
 			secuencia2 = secuencia;
 			secuencia3 = secuencia;
-			std::cout << "METODO SELECCION\n";
+			std::cout << "\nMETODO SELECCION";
 			Seleccion(secuencia1, size_secuencia, mostrar_traza);
 			if (!mostrar_traza) {
 				Print(secuencia1, size_secuencia);
 			}
-			std::cout << "METODO MERGESORT\n";
+			std::cout << "\nMETODO MERGESORT";
 			MergeSort(secuencia2, size_secuencia, mostrar_traza);
 			if (!mostrar_traza) {
 				Print(secuencia2, size_secuencia);
 			}
-			std::cout << "METODO HEAPSORT\n";
+			std::cout << "\nMETODO HEAPSORT";
 			HeapSort(secuencia3, size_secuencia, mostrar_traza);
 			if (!mostrar_traza) {
 				Print(secuencia3, size_secuencia);

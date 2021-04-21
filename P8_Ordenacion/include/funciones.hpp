@@ -300,9 +300,21 @@ void baja (int inicio, std::vector<Clave>* secuencia, int n, bool traza) {
     }
 
     if (secuencia->at(h) <= secuencia->at(inicio)) {
+      if (traza) {
+        std::cout << "\nComparacion: " << secuencia->at(h) << " <= " << secuencia->at(inicio) << " : true";
+        if (traza) {
+          Print(secuencia, secuencia->size());
+        }
+      }
       break;
     } else {
+      if (traza) {
+        std::cout << "\nComparacion: " << secuencia->at(h) << " <= " << secuencia->at(inicio) << " : false";
+      }
       std::swap(secuencia->at(inicio), secuencia->at(h));
+      if (traza) {
+        Print(secuencia, secuencia->size());
+      }
       inicio = h;
     }
   }
@@ -314,7 +326,13 @@ void heapsort (std::vector<Clave>* secuencia, int n, bool traza) {
     baja(i, secuencia, n, traza);
   }
   for (int i = n; i > 1; --i) {
+    if (traza) {
+      std::cout << "\nComparacion: iterador i (" << i << ") <= 1"  << " : true";
+    }
     std::swap(secuencia->at(1), secuencia->at(i));
+    if (traza) {
+      Print(secuencia, secuencia->size());
+    }
     baja(1, secuencia, i - 1, traza);
   }
 }
