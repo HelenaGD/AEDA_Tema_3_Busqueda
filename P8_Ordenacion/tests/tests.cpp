@@ -5,7 +5,10 @@
 
 using Clave = int;
 
-
+#define RESET "\033[0m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define BOLD "\033[1m"
 
 class Testclass {
  public:
@@ -79,27 +82,27 @@ int main(void) {
   Testclass test;
   system("clear");
   std::cout << "Test Funcion Insercion: ";
-  std::cout << ((test.TestInsercion()) ? "ok" : "fail") << std::endl; 
+  std::cout << ((test.TestInsercion()) ? GREEN"ok"RESET : RED"fail"RESET) << std::endl; 
   system("sleep 1");
 
   std::cout << "Test Funcion QuickSort: ";
-  std::cout << ((test.TestQuickSort()) ? "ok" : "fail") << std::endl; 
+  std::cout << ((test.TestQuickSort()) ? GREEN"ok"RESET : RED"fail"RESET) << std::endl; 
   system("sleep 1");
 
   std::cout << "Test Funcion ShellSort: ";
-  std::cout << ((test.TestShellSort()) ? "ok" : "fail") << std::endl; 
+  std::cout << ((test.TestShellSort()) ? GREEN"ok"RESET : RED"fail"RESET) << std::endl;  
   system("sleep 1");
 
   std::cout << "Test Funcion Seleccion: ";
-  std::cout << ((test.TestSeleccion()) ? "ok" : "fail") << std::endl; 
+  std::cout << ((test.TestSeleccion()) ? GREEN"ok"RESET : RED"fail"RESET) << std::endl;  
   system("sleep 1");
 
   std::cout << "Test Funcion MergeSort: ";
-  std::cout << ((test.TestMergeSort()) ? "ok" : "fail") << std::endl; 
+  std::cout << ((test.TestMergeSort()) ? GREEN"ok"RESET : RED"fail"RESET) << std::endl;  
   system("sleep 1");
 
   std::cout << "Test Funcion HeapSort: ";
-  std::cout << ((test.TestHeapSort()) ? "ok" : "fail") << std::endl; 
+  std::cout << ((test.TestHeapSort()) ? GREEN"ok"RESET : RED"fail"RESET) << std::endl;  
   system("sleep 1");
 
   return 0;

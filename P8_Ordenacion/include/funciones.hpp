@@ -5,10 +5,13 @@
 #define MAXIMO 1000
 #define MINIMO 1
 
+#define RESET "\033[0m"
+#define BOLD "\033[1m"
+
 int RecogerCantidadPositiva(int cantidad_max = INFINITO) {
 	int cantidad = 0;
 	do {
-		std::cout << "\nInput: ";
+		std::cout << BOLD << "\nInput: " << RESET;
 		std::cin >> cantidad;
 	} while ((cantidad <= 0) && (cantidad > cantidad_max));
 	return cantidad;
@@ -16,11 +19,11 @@ int RecogerCantidadPositiva(int cantidad_max = INFINITO) {
 
 template <class Clave>
 void Print(std::vector<Clave>* secuencia, int size_secuencia) {
-  std::cout << "\nSecuencia: ";
+  std::cout << BOLD << "\nSecuencia: ";
   for (int i = 0; i < size_secuencia; ++i) {
     std::cout << secuencia->at(i) << " ";
   }
-  std::cout << "\n";
+  std::cout << "\n" << RESET;
 }
 
 template <class Clave>
