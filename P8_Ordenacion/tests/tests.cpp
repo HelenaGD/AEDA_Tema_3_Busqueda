@@ -1,36 +1,106 @@
-#include "lista.hpp"
-#include "tablahash.hpp"
-#include "funciondispersion.hpp"
-#include "fdmodulo.hpp"
-#include "fdpseudoaleatoria.hpp"
+#include "funciones.hpp"
 
+#include <vector>
 #include "iostream"
+
+using Clave = int;
+
+
 
 class Testclass {
  public:
-  bool ConstructorTablaHash () {
-    bool test = false;
+  std::vector<Clave> secuencia_correcta = {1, 2, 3, 6, 8};
+  std::vector<Clave> secuencia_desordenada = {6, 8, 2, 1, 3};
 
-    int size_tabla = 1;
-    fdModulo<int> *fd1 = new fdModulo<int> (size_tabla);
-    fdPseudoaleatoria<int> *fd2 = new fdPseudoaleatoria<int> (size_tabla);
+  bool TestInsercion() {
+    int size_secuencia = 5;
+    std::vector<Clave>* secuencia = new std::vector<Clave>;
+    secuencia->resize(size_secuencia);
+    *secuencia = secuencia_desordenada;
 
-    TablaHash<int> tabla1(size_tabla, fd1);
-    TablaHash<int> tabla2(size_tabla, fd2);
+    Insercion(secuencia, size_secuencia, false);
+    return (*secuencia == secuencia_correcta);
+  }
 
-    test = (tabla1.get_sizeTabla() == size_tabla);
-    test = (tabla2.get_sizeTabla() == size_tabla);
-    return test;
+  bool TestQuickSort() {
+    int size_secuencia = 5;
+    std::vector<Clave>* secuencia = new std::vector<Clave>;
+    secuencia->resize(size_secuencia);
+    *secuencia = secuencia_desordenada;
+
+    QuickSort(secuencia, size_secuencia, false);
+    return (*secuencia == secuencia_correcta);
+  }
+
+  bool TestShellSort() {
+    int size_secuencia = 5;
+    std::vector<Clave>* secuencia = new std::vector<Clave>;
+    secuencia->resize(size_secuencia);
+    *secuencia = secuencia_desordenada;
+
+    ShellSort(secuencia, size_secuencia, false);
+    return (*secuencia == secuencia_correcta);
+  }
+
+  bool TestSeleccion() {
+    int size_secuencia = 5;
+    std::vector<Clave>* secuencia = new std::vector<Clave>;
+    secuencia->resize(size_secuencia);
+    *secuencia = secuencia_desordenada;
+
+    Seleccion(secuencia, size_secuencia, false);
+
+    return (*secuencia == secuencia_correcta);
+  }
+
+  bool TestMergeSort() {
+    int size_secuencia = 5;
+    std::vector<Clave>* secuencia = new std::vector<Clave>;
+    secuencia->resize(size_secuencia);
+    *secuencia = secuencia_desordenada;
+
+    MergeSort(secuencia, size_secuencia, false);
+    return (*secuencia == secuencia_correcta);
+  }
+
+  bool TestHeapSort() {
+    int size_secuencia = 5;
+    std::vector<Clave>* secuencia = new std::vector<Clave>;
+    secuencia->resize(size_secuencia);
+    *secuencia = secuencia_desordenada;
+
+    HeapSort(secuencia, size_secuencia, false);
+
+    return (*secuencia == secuencia_correcta);
   }
 };
 
 int main(void) {
   Testclass test;
-  bool funcionamiento = false;
+  system("clear");
+  std::cout << "Test Funcion Insercion: ";
+  std::cout << ((test.TestInsercion()) ? "ok" : "fail") << std::endl; 
+  system("sleep 1");
 
-  funcionamiento = test.ConstructorTablaHash();
-  std::cout << "Test Constructor de la Tabla Hash: ";
-  std::cout << ((funcionamiento) ? "ok" : "fallo") << std::endl; 
+  std::cout << "Test Funcion QuickSort: ";
+  std::cout << ((test.TestQuickSort()) ? "ok" : "fail") << std::endl; 
+  system("sleep 1");
+
+  std::cout << "Test Funcion ShellSort: ";
+  std::cout << ((test.TestShellSort()) ? "ok" : "fail") << std::endl; 
+  system("sleep 1");
+
+  std::cout << "Test Funcion Seleccion: ";
+  std::cout << ((test.TestSeleccion()) ? "ok" : "fail") << std::endl; 
+  system("sleep 1");
+
+  std::cout << "Test Funcion MergeSort: ";
+  std::cout << ((test.TestMergeSort()) ? "ok" : "fail") << std::endl; 
+  system("sleep 1");
+
+  std::cout << "Test Funcion HeapSort: ";
+  std::cout << ((test.TestHeapSort()) ? "ok" : "fail") << std::endl; 
+  system("sleep 1");
 
   return 0;
 }

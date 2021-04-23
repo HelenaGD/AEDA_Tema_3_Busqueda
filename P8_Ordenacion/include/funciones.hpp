@@ -182,8 +182,8 @@ template <class Clave>
 void Seleccion (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
   Clave aux;
   int minimo = 0;
-  for (int i = 1; i < (size_secuencia - 1); ++i) {
-    for (int i = 1; i < (size_secuencia - 1); ++i) {
+  for (int i = 0; i < (size_secuencia - 1); ++i) {
+    for (int i = 0; i < (size_secuencia - 1); ++i) {
       minimo = i;
       for (int j = (i + 1); j < size_secuencia; ++j) {
         if (secuencia->at(j) < secuencia->at(minimo)) {
@@ -278,7 +278,6 @@ void Msort (std::vector<Clave>* secuencia, int inicio, int fin, bool traza) {
   }
 }
 
-
 template <class Clave>
 void MergeSort (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
   int inicio = 0, fin = size_secuencia - 1;
@@ -287,10 +286,27 @@ void MergeSort (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
 
 template <class Clave>
 void baja (int inicio, std::vector<Clave>* secuencia, int n, bool traza) {
-  int h1 = 0, h2 = 0, h = 0;
-  while ((2*inicio) <= n) {
-    h1 = 2*inicio;
-    h2 = h1 + 1;
+  int h1 = 2*inicio + 1, h2 = h1 + 2, h = inicio;
+  if (h1 < n && secuencia->at(h1) > secuencia->at(h)) {
+    h = h1;
+  }
+  if (h2 < n && secuencia->at(h2) > secuencia->at(h)) {
+    h = h2;
+  }
+  if (h != inicio) {
+    if (traza) {
+     // std::cout << "\nComparacion: " << secuencia->at(h) << " <= " << secuencia->at(inicio) << " : true";
+    }
+    std::swap(secuencia->at(inicio), secuencia->at(h));
+    if (traza) {
+      Print(secuencia, secuencia->size());
+    }
+    baja(h,secuencia,n,traza);
+  }
+  /*
+  while ((h1) <= n) {
+    h1 = 2*inicio +1;
+    h2 = h1 + 2;
     if (h1 == n) {
       h = h1;
     } else if (secuencia->at(h1) > secuencia->at(h2)) {
@@ -317,28 +333,29 @@ void baja (int inicio, std::vector<Clave>* secuencia, int n, bool traza) {
       }
       inicio = h;
     }
-  }
+  }*/
 }
 
 template <class Clave>
 void heapsort (std::vector<Clave>* secuencia, int n, bool traza) {
-  for (int i = (n / 2); i > 0; --i) {
+  for (int i = (n / 2) - 1; i >= 0; --i) {
     baja(i, secuencia, n, traza);
   }
-  for (int i = n; i > 1; --i) {
+  
+  for (int i = n - 1; i > 0 ; --i) {
     if (traza) {
-      std::cout << "\nComparacion: iterador i (" << i << ") <= 1"  << " : true";
+      std::cout << "\nComparacion: iterador i (" << i << ") > 1"  << " : true";
     }
-    std::swap(secuencia->at(1), secuencia->at(i));
+    std::swap(secuencia->at(0), secuencia->at(i));
     if (traza) {
       Print(secuencia, secuencia->size());
     }
-    baja(1, secuencia, i - 1, traza);
+    baja(0, secuencia, i, traza);
   }
 }
 
 template <class Clave>
 void HeapSort (std::vector<Clave>* secuencia, int size_secuencia, bool traza) {
-  int n = size_secuencia - 1;
+  int n = size_secuencia;
   heapsort(secuencia, n, traza);
 }

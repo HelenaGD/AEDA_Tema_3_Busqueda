@@ -25,7 +25,6 @@ clean:
 	-rm $(BIN)/*
 
 tests: clean $(BIN)/$(TESTER)
-	#clear
 $(BIN)/$(TESTER): $(TESTS)/*.cpp
 	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
 	./$(BIN)/$(TESTER)
